@@ -19,7 +19,10 @@ namespace CodeMonkey.KeyDoorSystemCM {
     /// <summary>
     /// Added to Door, open with this Key reference
     /// </summary>
+    
     public class DoorLock : MonoBehaviour {
+
+        [SerializeField] private AudioSource _doorSound;
 
         [Header("Door Lock")]
         [Tooltip("The Key that opens this Door")]
@@ -37,6 +40,9 @@ namespace CodeMonkey.KeyDoorSystemCM {
         public void OpenDoor() {
             // Play Open Door Animation
             m_Animator.SetTrigger("Open");
+
+            AudioSource newSound = Instantiate(_doorSound, transform.position, Quaternion.identity);
+            Destroy(newSound.gameObject, newSound.clip.length);
         }
 
         public void CloseDoor() {
