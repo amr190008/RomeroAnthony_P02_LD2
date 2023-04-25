@@ -4,15 +4,15 @@ using UnityEngine;
 
 public class Sounds : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField] private AudioSource _keySound;
 
-    // Update is called once per frame
-    void Update()
+    private void OnTriggerEnter(Collider other)
     {
-        
+        if (other.gameObject.CompareTag("PickUp"))
+        {
+            AudioSource newSound = Instantiate(_keySound, transform.position, Quaternion.identity);
+            Destroy(newSound.gameObject, newSound.clip.length);
+        }
+
     }
 }
